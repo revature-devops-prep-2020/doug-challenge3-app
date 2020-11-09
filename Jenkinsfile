@@ -16,11 +16,11 @@ pipeline {
                     }
                 }
                 stage('building') {
-                    agent {
-                        docker {
-                        image 'docker'
-                        }
-                    }
+                    // agent {
+                    //     docker {
+                    //     image 'docker'
+                    //     }
+                    // }
                     steps {
                         sh 'docker-compose build'
                     }
