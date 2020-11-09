@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     stages {
-        stage(building and quality checking){
+        stage("building and quality checking"){
             parallel{
                 stage('sonarqube quality check') {
                     steps {
