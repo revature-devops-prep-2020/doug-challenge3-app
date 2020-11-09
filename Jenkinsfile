@@ -7,11 +7,11 @@ pipeline {
             parallel{
                 stage('sonarqube quality check') {
                     steps {
-                        withSonarQubeEnv("SonarCloud")
-                        {
+                        // withSonarQubeEnv("SonarCloud")
+                        // {
                         // sh "./gradlew sonarqube -Dsonar.branch.name=\"master\""
-                        sleep(10)
-                        }
+                        // sleep(10)
+                        // }
                     }
                 }
 
