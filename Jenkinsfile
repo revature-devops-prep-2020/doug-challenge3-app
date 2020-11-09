@@ -76,7 +76,7 @@ pipeline {
             steps {
                 withKubeConfig([credentialsId: 'k8sCred', serverUrl: '${KUBEURL}']) {
                     sh 'kubectl apply -f azure-vote-all-in-one-redis.yaml'
-                    sh 'kubectl rollout restart deployment.apps/azure-vote-front'
+                    sh 'kubectl rollout restart deployment/azure-vote-front'
                  }
              }
             post {
