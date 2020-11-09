@@ -9,7 +9,7 @@ pipeline {
                     steps {
                         withSonarQubeEnv("SonarCloud")
                         {
-                        sh "./gradlew sonarqube -Dsonar.branch.name=\"master\""
+                        // sh "./gradlew sonarqube -Dsonar.branch.name=\"master\""
                         sleep(10)
                         }
                     }
@@ -39,16 +39,16 @@ pipeline {
         stage('sonar quality gate') {
             steps {
                 sh 'echo well'
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
-                }
+                // timeout(time: 1, unit: 'HOURS') {
+                //     waitForQualityGate abortPipeline: true
+                // }
             }
             post {
                 success {
-                    slackSend(color: 'good', message: "Gradle project '${JOB_NAME}' [${GIT_BRANCH}] has passed the SonarQube quality gate.")
+                    slackSend(color: 'good', message: "project '${JOB_NAME}' [${GIT_BRANCH}] has passed the SonarQube quality gate.")
                 }
                 failure {
-                    slackSend(color: 'danger', message: "Gradle project '${JOB_NAME}' [${GIT_BRANCH}] failed the Sonar quality gate.")
+                    slackSend(color: 'danger', message: "project '${JOB_NAME}' [${GIT_BRANCH}] failed the Sonar quality gate.")
                 }
             }
         }
