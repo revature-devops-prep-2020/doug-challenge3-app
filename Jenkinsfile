@@ -7,6 +7,7 @@ pipeline {
             parallel{
                 stage('sonarqube quality check') {
                     steps {
+                        sh 'echo well, TBD'
                         // withSonarQubeEnv("SonarCloud")
                         // {
                         // sh "./gradlew sonarqube -Dsonar.branch.name=\"master\""
@@ -14,7 +15,6 @@ pipeline {
                         // }
                     }
                 }
-
                 stage('building') {
                     agent {
                         docker {
@@ -24,14 +24,14 @@ pipeline {
                     steps {
                         sh 'docker-compose --build'
                     }
-                    post {
-                        success {
-                            slackSend(color: 'good', message: " Project '${JOB_NAME}' [${GIT_BRANCH}] has been updated and pulled from Github.")
-                            }
-                        failure {
-                            slackSend(color: 'danger', message: "Project '${JOB_NAME}' [${GIT_BRANCH}] failed in building.")
-                            }
+                post {
+                    success {
+                        slackSend(color: 'good', message: " Project '${JOB_NAME}' [${GIT_BRANCH}] has been updated and pulled from Github.")
                         }
+                    failure {
+                        slackSend(color: 'danger', message: "Project '${JOB_NAME}' [${GIT_BRANCH}] failed in building.")
+                        }
+                    }
                 }    
             }
         }
